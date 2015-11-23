@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- <link href="style.css" rel="stylesheet"> -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+        $(document).ready(function (){
+            var socket = io.connect();
+            var messages = [];
+            for (var i=0; i<messages.length; i++){
+                $('#message').append(messages[i])
+              }
+            socket.on('connect', function (data) {
+              console.log('BROWSER::WE ARE USING SOCKETS!');
+            })
+            socket.on('messageFromServer', function(data) {
+              console.log('messageFromServer', data)
+              messages.push(data)
+              $('#message').append(data)
+            })
+        })
+    </script>
+  </head>
+  <body>
+    <h1>HelloApp</h1>
+    <div id="message">
+    </div>
+  </body>
+</html>
